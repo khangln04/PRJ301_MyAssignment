@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Thông Tin Sinh Viên</title>
+        <style>
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                border: 1px solid black;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #008080;
+                color: #ffffff;
+            }
+
+            .header-row {
+                background-color: #008000;
+                color: #ffffff;
+            }
+
+        </style>
+    </head>
+    <body>
+
+        <h2>Thông Tin Sinh Viên</h2>
+
+        <table>
+            <tr>
+                <th>No</th>
+                <th>Class</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Attendance</th>
+                <th>Taker</th>
+<!--                <th>Record Time</th>-->
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Class A</td>
+                <td>12345</td>
+                <td>John Doe</td>
+                <td><img src="path/to/image.jpg" alt="Student Image" width="50"></td>
+                <td>
+                    <input type="checkbox" id="present" name="present">
+                    <label for="present">present</label>
+                    <input type="checkbox" id="absent" name="absent">
+                    <label for="absent">absent</label>
+                </td>
+                <td>Teacher XYZ</td>
+<!--                <td>2023-10-07 10:00 AM</td>-->
+            </tr>
+        </table>
+
+    </body>
+</html>
