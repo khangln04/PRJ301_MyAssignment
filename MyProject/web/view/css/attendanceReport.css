@@ -1,0 +1,83 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Oct 9, 2023, 3:24:28 PM
+    Author     : fpt
+*/
+            body {
+                font-family: Arial, sans-serif;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            th, td {
+                border: 1px solid grey;
+                padding: 8px;
+                text-align: left;
+            }
+
+            th {
+                background-color: #6b90da;
+                color: #ffffff;
+            }
+
+            /* Thu nhỏ độ rộng của các cột trừ cột "Attendance Result" */
+            th:not(:nth-child(5)), td:not(:nth-child(5)) {
+                width: 80px;
+            }
+
+            /* Tăng chiều rộng của cột "Attendance Result" */
+            th:nth-child(5), td:nth-child(5) {
+                width: 200px;
+            }
+
+            .outer-bar {
+                position: relative;
+                height: 20px;
+                width: 100px;
+                margin: 0 auto;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                overflow: hidden;
+            }
+
+            .inner-bar {
+                height: 100%;
+                position: absolute;
+                top: 0;
+            }
+
+            .attendance-bar {
+                position: relative;
+                height: 20px;
+                width: 100%;
+                margin: 0 auto;
+                background-color: #ccc;
+            }
+
+            .green-bar {
+                height: 100%;
+                background-color: #4CAF50;
+                float: left;
+            }
+
+            .red-bar {
+                height: 100%;
+                background-color: #FF5733;
+                float: left;
+            }
+
+            .attendance-text, .absence-text {
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 100%;
+                text-align: center;
+                font-weight: bold;
+            }
+

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Attendance Table</title>
+        <link href="../css/attendanceReport.css" rel="stylesheet" type="text/css"/>
+        
+    </head>
+
+    <body>
+
+        <h2>Attendance Report</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Class</th>
+                    <th>Code</th>
+                    <th>Name</th>
+                    <th>Attendance Result</th>
+                    <th>Lecturer</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Đây là nơi để thêm các hàng thông tin sinh viên -->
+                <tr>
+                    <td>1</td>
+                    <td>Class A</td>
+                    <td>12345</td>
+                    <td>John Doe</td>
+                    <td class="attendance-bar">
+                        <div class="outer-bar">
+                            <div class="inner-bar green-bar" style="width: 70%;"></div>
+                            <div class="inner-bar red-bar" style="width: 30%;"></div>
+                        </div>
+                        <div class="message">Students are absent more than 20% of sessions</div>
+                    </td>
+                    <td>Dr. Smith</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Class B</td>
+                    <td>67890</td>
+                    <td>Jane Smith</td>
+                    <td class="attendance-bar">
+                        <div class="green-bar" style="width: 95%;"></div>
+                        <div class="red-bar" style="width: 5%;"></div>
+                        <!--                        <span class="attendance-text">19</span>
+                                                <span class="absence-text">1</span>-->
+                    </td>
+                    <td>Prof. Johnson</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Class C</td>
+                    <td>13579</td>
+                    <td>Alice Johnson</td>
+                    <td class="attendance-bar">
+                        <div class="green-bar" style="width: 100%;"></div>
+                        <div class="red-bar" style="width: 0%;"></div>
+                        <!--                        <span class="attendance-text">20</span>
+                                                <span class="absence-text">0</span>-->
+                    </td>
+                    <td>Dr. Brown</td>
+            </tbody>
+        </table>
+    </body>
+
+</html>
