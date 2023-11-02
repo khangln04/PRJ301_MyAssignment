@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package model.assignment;
 
 import java.util.ArrayList;
 
@@ -10,12 +10,10 @@ import java.util.ArrayList;
  *
  * @author fpt
  */
-public class Group{
+public class Instructor {
     private int id;
     private String name;
-    private Instructor supervisor;
-    private ArrayList<Student> students = new ArrayList<>();
-    private Subject subject;
+    private ArrayList<Group> groups = new ArrayList<>();
     private ArrayList<Session> sessions = new ArrayList<>();
 
     public int getId() {
@@ -34,28 +32,12 @@ public class Group{
         this.name = name;
     }
 
-    public Instructor getSupervisor() {
-        return supervisor;
+    public ArrayList<Group> getGroups() {
+        return groups;
     }
 
-    public void setSupervisor(Instructor supervisor) {
-        this.supervisor = supervisor;
-    }
-
-    public ArrayList<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(ArrayList<Student> students) {
-        this.students = students;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setGroups(ArrayList<Group> groups) {
+        this.groups = groups;
     }
 
     public ArrayList<Session> getSessions() {
@@ -65,5 +47,6 @@ public class Group{
     public void setSessions(ArrayList<Session> sessions) {
         this.sessions = sessions;
     }
+    
     
 }
