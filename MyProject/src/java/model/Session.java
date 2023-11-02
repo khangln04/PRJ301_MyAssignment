@@ -2,15 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model.assignment;
+package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 /**
  *
  * @author fpt
  */
-public class Session {
+public class Session implements IBaseModel {
     private int id;
     private Date date;
     private Group group;
@@ -18,7 +19,25 @@ public class Session {
     private Room room;
     private TimeSlot slot;
     private int index;
+    private boolean isAtt;
+    private ArrayList<Attendance> atts = new ArrayList<>();
 
+    public ArrayList<Attendance> getAtts() {
+        return atts;
+    }
+
+    public void setAtts(ArrayList<Attendance> atts) {
+        this.atts = atts;
+    }
+
+    public boolean isIsAtt() {
+        return isAtt;
+    }
+
+    public void setIsAtt(boolean isAtt) {
+        this.isAtt = isAtt;
+    }
+    
     public int getId() {
         return id;
     }
@@ -75,5 +94,5 @@ public class Session {
         this.index = index;
     }
     
-    
 }
+

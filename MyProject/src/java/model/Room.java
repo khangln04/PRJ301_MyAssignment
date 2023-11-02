@@ -2,13 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model.assignment;
+package model;
 
 /**
  *
  * @author fpt
  */
-public class Room {
+public class Room implements IBaseModel {
     private String id;
 
     public String getId() {
@@ -19,5 +19,5 @@ public class Room {
         this.id = id;
     }
     
-    
 }
+

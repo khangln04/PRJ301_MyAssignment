@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model.assignment;
+package model;
 
 import java.util.ArrayList;
 
@@ -10,9 +10,10 @@ import java.util.ArrayList;
  *
  * @author fpt
  */
-public class Subject {
-    private int id; 
+public class Student implements IBaseModel {
+    private int id;
     private String name;
+    private String img;
     private ArrayList<Group> groups = new ArrayList<>();
 
     public int getId() {
@@ -31,6 +32,14 @@ public class Subject {
         this.name = name;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     public ArrayList<Group> getGroups() {
         return groups;
     }
@@ -38,6 +47,6 @@ public class Subject {
     public void setGroups(ArrayList<Group> groups) {
         this.groups = groups;
     }
-    
+
     
 }
