@@ -14,7 +14,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AttendanceTakingController</servlet-name>
-        <url-pattern>/att</url-pattern>
+        <url-pattern>/attendance</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

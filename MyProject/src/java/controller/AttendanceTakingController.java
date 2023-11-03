@@ -46,7 +46,7 @@ public class AttendanceTakingController extends HttpServlet {
         ArrayList<Attendance> atts = attDb.getAttendancesBySession(id);
         
         request.setAttribute("atts", atts);
-        request.getRequestDispatcher("../view/instructor/att.jsp").forward(request, response);
+        request.getRequestDispatcher("attendance.jsp").forward(request, response);
     } 
 
     /** 

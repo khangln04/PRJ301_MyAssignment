@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public class Student implements IBaseModel {
     private int id;
     private String name;
-    private String img;
     private ArrayList<Group> groups = new ArrayList<>();
 
     public int getId() {
@@ -30,14 +29,6 @@ public class Student implements IBaseModel {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
-        this.img = img;
     }
 
     public ArrayList<Group> getGroups() {

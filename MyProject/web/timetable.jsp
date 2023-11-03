@@ -10,9 +10,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Schedula of Instructor</title>
     </head>
     <body>
+        <div id="ghichu">
+        <p>
+            Các phòng bắt đầu bằng AL thuộc tòa nhà Alpha. VD: AL...<br>
+            Các phòng bắt đầu bằng BE thuộc tòa nhà Beta. VD: BE,..<br>
+            Các phòng bắt đầu bằng G thuộc tòa nhà Gamma. VD: G201,...<br>
+            Các phòng tập bằng đầu bằng R thuộc khu vực sân tập Vovinam.<br>
+            Các phòng bắt đầu bằng DE thuộc tòa nhà Delta. VD: DE,..<br>
+            Little UK (LUK) thuộc tầng 5 tòa nhà Delta
+        </p>
+    </div>
         <form action="timetable" method="GET">
             <input type="hidden" name="id" value="${param.id}"/>
             From <input type="date" value="${requestScope.from}" name="from"/> 
@@ -35,7 +45,7 @@
                         <td>
                             <c:forEach items="${requestScope.sessions}" var="k">
                                 <c:if test="${k.date eq d and k.slot.id eq s.id}">
-                                    <a href="att?id=${k.id}">
+                                    <a href="attendance?id=${k.id}">
                                         ${k.group.name}-${k.group.subject.name}-${k.room.id}
                                         <c:if test="${k.isAtt}">
                                             (attended)

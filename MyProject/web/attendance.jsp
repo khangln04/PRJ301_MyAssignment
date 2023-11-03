@@ -10,11 +10,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Check Student Attendance</title>
     </head>
     <body>
         ${requestScope.ses.group.name}-${requestScope.ses.group.subject.name}-${requestScope.ses.room.id}
-        <form action="att" method="POST">
+        <form action="attendance" method="POST">
             <table border="1px">
                 <tr>
                     <td>Student</td>
