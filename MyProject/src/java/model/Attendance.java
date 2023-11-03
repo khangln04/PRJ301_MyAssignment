@@ -4,6 +4,7 @@
  */
 package model;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -15,7 +16,7 @@ public class Attendance implements IBaseModel{
     private Student student;
     private boolean status;
     private String description;
-    private Date att_datetime;
+    private Date datetime;
 
     public Session getSession() {
         return session;
@@ -33,7 +34,7 @@ public class Attendance implements IBaseModel{
         this.student = student;
     }
 
-    public boolean getStatus() {
+    public boolean isStatus() {
         return status;
     }
 
@@ -49,12 +50,12 @@ public class Attendance implements IBaseModel{
         this.description = description;
     }
 
-    public Date getAtt_datetime() {
-        return att_datetime;
+    public Date getDatetime() {
+        return datetime;
     }
 
-    public void setAtt_datetime(Date att_datetime) {
-        this.att_datetime = att_datetime;
-    } 
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
+    }
+    
 }
-
