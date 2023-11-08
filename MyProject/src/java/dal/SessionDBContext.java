@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Attendance;
 import model.Group;
+import model.Instructor;
 import model.Room;
 import model.Session;
 import model.Subject;
@@ -27,12 +28,12 @@ public class SessionDBContext extends DBContext<Session> {
     public ArrayList<Session> getSessions(int iid, Date from, Date to) {
         ArrayList<Session> sessions = new ArrayList<>();
         try {
-            String sql = "SELECT  \n"
-                    + "	ses.sesid,ses.[date],ses.[index],ses.isAtt,r.roomid,sub.subid,sub.subname,g.gid,g.gname,t.tid,t.[description]\n"
+            String sql = "SELECT ses.sesid,ses.[date],ses.[index],ses.isAtt,r.roomid,sub.subid,sub.subname,g.gid,g.gname,t.tid,t.[description], i.iname\n"
                     + "FROM [Session] ses INNER JOIN [Group] g ON ses.gid = g.gid\n"
-                    + "							INNER JOIN [Subject] sub ON g.subid = sub.subid\n"
-                    + "							INNER JOIN Room r ON r.roomid = ses.rid\n"
-                    + "							INNER JOIN TimeSlot t ON ses.tid = t.tid\n"
+                    + "INNER JOIN [Subject] sub ON g.subid = sub.subid\n"
+                    + "INNER JOIN Room r ON r.roomid = ses.rid\n"
+                    + "INNER JOIN TimeSlot t ON ses.tid = t.tid\n"
+                    + "INNER JOIN Instructor i ON ses.iid = i.iid\n"
                     + "WHERE ses.iid = ? AND ses.[date] >= ? AND ses.[date] <= ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, iid);
@@ -63,6 +64,10 @@ public class SessionDBContext extends DBContext<Session> {
                 time.setId(rs.getInt("tid"));
                 time.setDescription(rs.getString("description"));
                 session.setSlot(time);
+                
+                Instructor instructor = new Instructor();
+                instructor.setName(rs.getString("iname"));
+                session.setInstructor(instructor);
 
                 sessions.add(session);
             }
@@ -73,14 +78,14 @@ public class SessionDBContext extends DBContext<Session> {
         return sessions;
     }
 
-    public Session getSessions(int sesid) {
+    public Session getSessionsBySesid(int sesid) {
         try {
             String sql = "SELECT  \n"
                     + "	ses.sesid,ses.[date],ses.[index],ses.isAtt,r.roomid,sub.subid,sub.subname,g.gid,g.gname,t.tid,t.[description]\n"
                     + "FROM [Session] ses INNER JOIN [Group] g ON ses.gid = g.gid\n"
-                    + "							INNER JOIN [Subject] sub ON g.subid = sub.subid\n"
-                    + "							INNER JOIN Room r ON r.roomid = ses.rid\n"
-                    + "							INNER JOIN TimeSlot t ON ses.tid = t.tid\n"
+                    + "INNER JOIN [Subject] sub ON g.subid = sub.subid\n"
+                    + "INNER JOIN Room r ON r.roomid = ses.rid\n"
+                    + "INNER JOIN TimeSlot t ON ses.tid = t.tid\n"
                     + "WHERE ses.sesid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, sesid);
@@ -169,6 +174,28 @@ public class SessionDBContext extends DBContext<Session> {
                 Logger.getLogger(SessionDBContext.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    public ArrayList<Date> getSesdateByGnameAndSubname(String gname, String subname) {
+        ArrayList<Date> dates = new ArrayList<>();
+        try {
+            String sql = "select ses.[date] \n"
+                    + "from Session ses\n"
+                    + "join [Group] g on ses.gid = g.gid\n"
+                    + "join [Subject] sub on g.subid = sub.subid\n"
+                    + "where g.gname=? and sub.subname = ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, gname);
+            stm.setString(2, subname);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Date date = rs.getDate("date");
+                dates.add(date);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return dates;
     }
 
     @Override

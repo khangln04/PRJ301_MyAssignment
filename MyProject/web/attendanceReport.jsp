@@ -10,7 +10,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Attendance Report</title>
-    <style>
+<!--    <style>
             table {
                 border-collapse: collapse; /* Loại bỏ khoảng cách giữa các đường kẻ */
                 width: 100%; /* Đảm bảo bảng đầy đủ chiều rộng của container */
@@ -31,7 +31,7 @@
                 padding: 10px;
                 border: 1px solid black;
             }
-        </style>
+        </style>-->
     </head>
     <body>
         <h1>Attendance sheet of class ${param.gname} with subject ${param.subname}: </h1>
@@ -63,15 +63,15 @@
                                 <td>
                                     <c:choose>
                                         <c:when test="${requestScope.absentPercentages[loop.index] > 20}">
-                                            <font color="red">${requestScope.absentPercentages[loop.index]}%</font>
+                                            <font color="red">${requestScope.absentList[loop.index]}%</font>
                                         </c:when>
                                         <c:otherwise>
-                                            ${requestScope.absentPercentages[loop.index]}%
+                                            ${requestScope.absentList[loop.index]}%
                                         </c:otherwise>
                                     </c:choose>
                                 </td>
                                 <c:forEach items="${requestScope.dates}" var="d">
-                                    <c:forEach items="${requestScope.atts}" var="a">
+                                    <c:forEach items="${requestScope.attendances}" var="a">
 
                                         <c:if test="${a.session.date eq d and a.student.id eq s.id}">
                                             <c:if test="${a.status}">

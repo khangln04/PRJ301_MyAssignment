@@ -5,7 +5,7 @@
 
 package controller;
 
-import dal.AttendenceDBContext;
+import dal.AttendanceDBContext;
 import dal.SessionDBContext;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,10 +39,10 @@ public class AttendanceTakingController extends HttpServlet {
     throws ServletException, IOException {
         SessionDBContext db = new SessionDBContext();
         int id = Integer.parseInt(request.getParameter("id"));
-        Session ses = db.getSessions(id);
+        Session ses = db.getSessionsBySesid(id);
         request.setAttribute("ses",ses);
         
-        AttendenceDBContext attDb = new AttendenceDBContext();
+        AttendanceDBContext attDb = new AttendanceDBContext();
         ArrayList<Attendance> atts = attDb.getAttendancesBySession(id);
         
         request.setAttribute("atts", atts);

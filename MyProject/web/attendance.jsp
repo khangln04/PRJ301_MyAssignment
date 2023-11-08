@@ -11,43 +11,74 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Check Student Attendance</title>
-    </head>
-    <body>
-        ${requestScope.ses.group.name}-${requestScope.ses.group.subject.name}-${requestScope.ses.room.id}
-        <form action="attendance" method="POST">
-            <table border="1px">
-                <tr>
-                    <td>Student</td>
-                    <td>Status</td>
-                    <td>Description</td>
-                    <td>Taking Time</td>
-                </tr>
-                <c:forEach items="${requestScope.atts}" var="a">
-                    <tr>
-                        <td>
-                            ${a.student.name}
-                            <input type="hidden" name="stuid" value="${a.student.id}"/>
-                        </td>
-                        <td>
-                            <input type="radio"
-                                   <c:if test="${!a.status}">
-                                       checked="checked"
-                                   </c:if>
-                                   name="status${a.student.id}" value="absent" /> absent
-                            <input type="radio"
-                                   <c:if test="${a.status}">
-                                       checked="checked"
-                                   </c:if>
-                                   name="status${a.student.id}" value="present" /> present
-                        </td>
-                        <td><input type="text" value="${a.description}" name="description${a.student.id}"/></td>
-                        <td>${a.datetime}</td>
-                    </tr>   
-                </c:forEach>
+        <style>
+            table {
+                border-collapse: collapse;
+                width: 100%;
+            }
+            table thead tr{
+                padding: 10px;
+            }
+            table thead tr th {
+                padding: 10px;
+            }
+            table tbody tr {
+                padding: 10px;
+            }
+            table tbody tr td {
+                padding: 10px;
+            }
 
-            </table>
-            <input type="hidden" value="${requestScope.ses.id}" name="sesid"/>
-            <input type="submit" value="Save"/>
-        </form>
+        </style>
+    </head>
+
+    <body>
+        <h1>Attendance Activity ${requestScope.ses.group.name}-${requestScope.ses.group.subject.name}-${requestScope.ses.room.id}</h1>
+        <div class="container">
+            <form action="attendance" method="POST">
+                <table border="1px" style="width: -webkit-fill-available;margin: 3% 1%;">
+                    <thead style="background-color: #6b90da;">
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Status</th>
+                            <th>Description</th>
+                            <th>Taking Time</th>
+                            <th>Taker</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach items="${requestScope.atts}" var="a">
+                            <tr>
+                                <td>
+                                    ${a.student.name}
+                                    <input type="hidden" name="stuid" value="${a.student.id}"/>
+                                </td>
+                                <td>
+                                    <input type="radio"
+                                           <c:if test="${!a.status}">
+                                               checked="checked"
+                                           </c:if>
+                                           name="status${a.student.id}" value="absent" /> Absent
+                                    <input type="radio"
+                                           <c:if test="${a.status}">
+                                               checked="checked"
+                                           </c:if>
+                                           name="status${a.student.id}" value="present" /> Present
+                                </td>
+                                <td><input type="text" value="${a.description}" name="description${a.student.id}"/></td>
+                                <td>${a.datetime}</td>
+                                <td>
+                                    ${a.session.instructor.name}
+                                </td>
+                            </tr>   
+                        </c:forEach>
+                    </tbody>
+                </table>
+                <input type="hidden" value="${requestScope.ses.id}" name="sesid"/>
+                <input style="display: flex; margin: 0 auto; margin-bottom: 1%" type="submit" value="Save"/>
+                <a href="timetable?name=${name}"><button style="display: flex; margin: 0 auto; margin-bottom: 1%">Back to TimeTable</button></a>
+                <a href="ListStudentAttendance?gname=${param.gname}&subname=${param.subname}"><button style="display: flex; margin: 0 auto; margin-bottom: 1%">View attendance sheet in class</button></a>
+            </form>
+        </div>
     </body>
 </html>
