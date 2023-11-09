@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.Attendance;
+import model.Group;
 import model.Session;
 import model.Student;
+import model.Subject;
 
 /**
  *
@@ -23,15 +25,17 @@ public class AttendanceDBContext extends DBContext<Attendance> {
     public ArrayList<Attendance> getAttendancesBySession(int sesid) {
         ArrayList<Attendance> atts = new ArrayList<>();
         try {
-            String sql = "SELECT s.stuid,s.stuname,\n"
-                    + "	ISNULL(a.status,0) as [status]\n"
-                    + "	,ISNULL(a.description,'') as [description],\n"
-                    + "	ISNULL(a.att_datetime,GETDATE()) as att_datetime\n"
-                    + "	FROM [Session] ses INNER JOIN [Group] g ON g.gid = ses.gid\n"
-                    + "	INNER JOIN Group_Student gs ON g.gid = gs.gid\n"
-                    + "	INNER JOIN Student s ON s.stuid = gs.stuid\n"
-                    + "	LEFT JOIN Attendance a ON a.sesid = ses.sesid AND s.stuid = a.stuid\n"
-                    + "	WHERE ses.sesid = ?";
+            String sql = "SELECT s.stuid,s.stuname, \n"
+                    + "ISNULL(a.status,0) as [status] \n"
+                    + ",ISNULL(a.description,'') as [description], \n"
+                    + "ISNULL(a.att_datetime,GETDATE()) as att_datetime, \n"
+                    + "g.gname, sub.subname \n"
+                    + "FROM [Session] ses INNER JOIN [Group] g ON g.gid = ses.gid \n"
+                    + "INNER JOIN Group_Student gs ON g.gid = gs.gid \n"
+                    + "INNER JOIN Student s ON s.stuid = gs.stuid \n"
+                    + "INNER JOIN [Subject] sub on g.subid = sub.subid \n"
+                    + "LEFT JOIN Attendance a ON a.sesid = ses.sesid AND s.stuid = a.stuid \n"
+                    + "WHERE ses.sesid = ?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, sesid);
             ResultSet rs = stm.executeQuery();
@@ -42,6 +46,13 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                 s.setId(rs.getInt("stuid"));
                 s.setName(rs.getString("stuname"));
                 att.setStudent(s);
+                Subject sub = new Subject();
+                sub.setName(rs.getString("subname"));
+                Group g = new Group();
+                g.setName(rs.getString("gname"));
+                g.setSubject(sub);
+                g.setId(sesid);
+                ses.setGroup(g);
                 ses.setId(sesid);
                 att.setSession(ses);
                 att.setStatus(rs.getBoolean("status"));
@@ -59,7 +70,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
     public ArrayList<Attendance> getAttendanceByGnameAndSubname(String gname, String subname) {
         ArrayList<Attendance> attendances = new ArrayList<>();
         try {
-            String sql = "select ses.sesid, stu.stuid, stu.stuname, a.[status], ses.[date]  \n"
+            String sql = "select ses.sesid, stu.stuid, stu.stuname, a.[status], ses.[date], ses.isAtt  \n"
                     + "from Attendance a \n"
                     + "full join Session ses on a.sesid = ses.sesid\n"
                     + "full join Student stu on a.stuid = stu.stuid\n"
@@ -75,6 +86,7 @@ public class AttendanceDBContext extends DBContext<Attendance> {
                 Session ses = new Session();
                 ses.setId(rs.getInt("sesid"));
                 ses.setDate(rs.getDate("date"));
+                ses.setIsAtt(rs.getBoolean("isAtt"));
                 att.setSession(ses);
                 Student stu = new Student();
                 stu.setId(rs.getInt("stuid"));
@@ -92,5 +104,13 @@ public class AttendanceDBContext extends DBContext<Attendance> {
     @Override
     public ArrayList<Attendance> list() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public static void main(String[] args) {
+        AttendanceDBContext adbc = new AttendanceDBContext();
+        ArrayList<Attendance> attendances = adbc.getAttendanceByGnameAndSubname("SE1763", "PRJ301");
+        for (Attendance a : attendances) {
+            System.out.println(a.getSession().isIsAtt());
+        }
     }
 }

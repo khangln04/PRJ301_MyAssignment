@@ -44,8 +44,12 @@ public class AttendanceTakingController extends HttpServlet {
         
         AttendanceDBContext attDb = new AttendanceDBContext();
         ArrayList<Attendance> atts = attDb.getAttendancesBySession(id);
-        
         request.setAttribute("atts", atts);
+        
+        Attendance a = atts.get(0);
+        request.setAttribute("a", a);
+        
+        
         request.getRequestDispatcher("attendance.jsp").forward(request, response);
     } 
 
@@ -74,7 +78,7 @@ public class AttendanceTakingController extends HttpServlet {
         }
         SessionDBContext sesDB = new SessionDBContext();
         sesDB.addAttendences(ses);
-        response.getWriter().println("done");
+        response.getWriter().print("Save successful");
     }
 
     /** 

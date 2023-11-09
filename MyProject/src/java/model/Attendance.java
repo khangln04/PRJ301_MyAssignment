@@ -18,6 +18,18 @@ public class Attendance implements IBaseModel{
     private String description;
     private Date datetime;
 
+    public Attendance() {
+    }
+
+    public Attendance(Session session, Student student, boolean status, String description, Date datetime) {
+        this.session = session;
+        this.student = student;
+        this.status = status;
+        this.description = description;
+        this.datetime = datetime;
+    }
+    
+
     public Session getSession() {
         return session;
     }

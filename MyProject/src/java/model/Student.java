@@ -13,7 +13,56 @@ import java.util.ArrayList;
 public class Student implements IBaseModel {
     private int id;
     private String name;
+    private String img;
+    private String phoneNumber;
+    private String address;
+    private String gmail;
     private ArrayList<Group> groups = new ArrayList<>();
+
+    public Student() {
+    }
+
+    public Student(int id, String name, String img, String phoneNumber, String address, String gmail) {
+        this.id = id;
+        this.name = name;
+        this.img = img;
+        this.phoneNumber = phoneNumber;
+        this.address = address;
+        this.gmail = gmail;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getGmail() {
+        return gmail;
+    }
+
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
+    }
+    
 
     public int getId() {
         return id;

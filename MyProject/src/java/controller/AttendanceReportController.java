@@ -21,7 +21,7 @@ import model.Student;
  *
  * @author fpt
  */
-public class AttendanceReportController  extends  HttpServlet{
+public class AttendanceReportController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,42 +32,31 @@ public class AttendanceReportController  extends  HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String gname = req.getParameter("gname");
         String subname = req.getParameter("subname");
-        if(gname!=null||subname!=null){
+        String mess = "";
+        if (gname != null || subname != null) {
+            mess = "Attendance Report of Class";
             SessionDBContext sessdbc = new SessionDBContext();
-            ArrayList<Date> dates  = sessdbc.getSesdateByGnameAndSubname(gname, subname);
-            
+            ArrayList<Date> dates = sessdbc.getSesdateByGnameAndSubname(gname, subname);
+
             AttendanceDBContext adbc = new AttendanceDBContext();
             ArrayList<Attendance> attendances = adbc.getAttendanceByGnameAndSubname(gname, subname);
-            
+
             StudentDBContext studbc = new StudentDBContext();
             ArrayList<Student> students = studbc.getAllStudentByGnameAndSubname(gname, subname);
-            
-            ArrayList<Double> absentList = new ArrayList<>();
-            int totalSess = dates.size();
-            int numberAbsent = 0;
-            
-            for (Student stu : students) {
-                for (Date date : dates) {
-                    for (Attendance att : attendances) {
-                        if(att.getSession().getDate().equals(date) && att.getStudent().getId() == stu.getId()) {
-                            if(!att.isStatus()) {
-                                numberAbsent++;
-                            }
-                        }
-                    }
-                }
-            }
-            
-            double absentPercent = (double) (numberAbsent/totalSess)*100;
-            absentList.add(absentPercent);
-            
+
             req.setAttribute("dates", dates);
             req.setAttribute("attendances", attendances);
             req.setAttribute("students", students);
-            req.setAttribute("absentList", absentList);
+//            req.setAttribute("absentList", absentList);
             req.getRequestDispatcher("/attendanceReport.jsp").forward(req, resp);
+        } else {
+            mess = "can not display information of list attendance report because have not gname and subname";
         }
-        
+        req.setAttribute("mess", mess);
+        req.getRequestDispatcher("/attendanceReport.jsp").forward(req, resp);
+
     }
     
+
+
 }

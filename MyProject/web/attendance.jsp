@@ -31,7 +31,7 @@
 
         </style>
     </head>
-
+    
     <body>
         <h1>Attendance Activity ${requestScope.ses.group.name}-${requestScope.ses.group.subject.name}-${requestScope.ses.room.id}</h1>
         <div class="container">
@@ -43,14 +43,13 @@
                             <th>Status</th>
                             <th>Description</th>
                             <th>Taking Time</th>
-                            <th>Taker</th>
                         </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${requestScope.atts}" var="a">
                             <tr>
                                 <td>
-                                    ${a.student.name}
+                                    <a <a href="information?sid=${a.student.id}">${a.student.name}</a>
                                     <input type="hidden" name="stuid" value="${a.student.id}"/>
                                 </td>
                                 <td>
@@ -67,18 +66,17 @@
                                 </td>
                                 <td><input type="text" value="${a.description}" name="description${a.student.id}"/></td>
                                 <td>${a.datetime}</td>
-                                <td>
-                                    ${a.session.instructor.name}
-                                </td>
                             </tr>   
                         </c:forEach>
                     </tbody>
                 </table>
                 <input type="hidden" value="${requestScope.ses.id}" name="sesid"/>
                 <input style="display: flex; margin: 0 auto; margin-bottom: 1%" type="submit" value="Save"/>
-                <a href="timetable?name=${name}"><button style="display: flex; margin: 0 auto; margin-bottom: 1%">Back to TimeTable</button></a>
-                <a href="ListStudentAttendance?gname=${param.gname}&subname=${param.subname}"><button style="display: flex; margin: 0 auto; margin-bottom: 1%">View attendance sheet in class</button></a>
+                <form action="attendance" method="post"> ${mess}    </form>
+                
             </form>
         </div>
+        <a href="timetable?id=${1}"><button style="display: flex; margin: 0 auto; margin-bottom: 1%">Back to TimeTable</button></a>
+        <a href="report?gname=${a.session.group.name}&subname=${a.session.group.subject.name}"><button style="display: flex; margin: 0 auto; margin-bottom: 1%">View attendance sheet in class</button></a>
     </body>
 </html>

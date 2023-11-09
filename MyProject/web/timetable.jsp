@@ -10,14 +10,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Schedula of Instructor</title>
+        <title>Schedular of Instructor</title>
         <style>
             table {
                 border-collapse: collapse;
                 width: 100%;
             }
             table thead tr{
-                
+
                 border: 1px solid black;
             }
             table thead tr th {
@@ -36,16 +36,6 @@
     </head>
     <body>
         <h1>Time Table</h1>
-        <div style="padding: 20px;" id="ghichu">
-            <p>
-                Các phòng bắt đầu bằng A thuộc tòa nhà Alpha. VD: A...<br>
-                Các phòng bắt đầu bằng B thuộc tòa nhà Beta. VD: B,..<br>
-                Các phòng bắt đầu bằng G thuộc tòa nhà Gamma. VD: G201,...<br>
-                Các phòng tập bằng đầu bằng R thuộc khu vực sân tập Vovinam.<br>
-                Các phòng bắt đầu bằng D thuộc tòa nhà Delta. VD: D,..<br>
-                Little UK (LUK) thuộc tầng 5 tòa nhà Delta
-            </p>
-        </div>
 
         <form action="timetable" method="GET" style="text-align: center;">
             <input type="hidden" name="id" value="${param.id}"/>
@@ -90,6 +80,17 @@
                 </c:forEach>
             </tbody>
         </table>
+        <div style="padding: 20px;" id="ghichu">
+            <p>
+                Các phòng bắt đầu bằng A thuộc tòa nhà Alpha. VD: A...<br>
+                Các phòng bắt đầu bằng B thuộc tòa nhà Beta. VD: B,..<br>
+                Các phòng bắt đầu bằng G thuộc tòa nhà Gamma. VD: G201,...<br>
+                Các phòng tập bằng đầu bằng R thuộc khu vực sân tập Vovinam.<br>
+                Các phòng bắt đầu bằng D thuộc tòa nhà Delta. VD: D,..<br>
+                Little UK (LUK) thuộc tầng 5 tòa nhà Delta
+            </p>
+        </div>
+
     </body>
 </html>
 

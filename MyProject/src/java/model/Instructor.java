@@ -13,8 +13,19 @@ import java.util.ArrayList;
 public class Instructor implements IBaseModel {
     private int id;
     private String name;
+    private String password;
     private ArrayList<Group> groups = new ArrayList<>();
     private ArrayList<Session> sessions = new ArrayList<>();
+
+    public Instructor() {
+    }
+
+    public Instructor(int id, String name, String password) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+    }
+    
 
     public int getId() {
         return id;
@@ -46,6 +57,14 @@ public class Instructor implements IBaseModel {
 
     public void setSessions(ArrayList<Session> sessions) {
         this.sessions = sessions;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
 }
